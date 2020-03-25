@@ -5,7 +5,7 @@ My plan is to start with some easy problems, get comfortable then move onto medi
 ## EASY
 | # | Title | Language | Date Completed, Date Revisited|
 | --- | ----- | -------- | ---------- |
-| 1119. P | | [Remove Vowels from a String](https://leetcode.com/problems/remove-vowels-from-a-string/) | | C++ | | 3/25/20, |
+| 1119. P | [Remove Vowels from a String](https://leetcode.com/problems/remove-vowels-from-a-string/) | | C++ | | 3/25/20, |
 ## MEDIUM
 
 ## HARD
