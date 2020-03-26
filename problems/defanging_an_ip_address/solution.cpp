@@ -1,16 +1,17 @@
 class Solution {
 public:
     string defangIPaddr(string address) {
-        string defang = "";
-        for(int i = 0; i < address.length(); i++){
+        string ans = "";
+        for(int i = 0; i < address.length(); i ++){
             if(address.at(i) == '.'){
-                defang += '[';
-                defang += '.';
-                defang += ']';
+                //address.at(i) = '[' + '.' + ']';
+                ans += "[";
+                ans += ".";
+                ans += "]";
                 continue;
             }
-            defang += address.at(i);
+            ans += address.at(i);
         }
-        return defang;
+        return ans;
     }
 };
