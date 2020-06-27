@@ -1,6 +1,14 @@
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:       
-        for i in range(0, len(nums)):
-            for j in range(i, len(nums)):
-                if nums[i]+nums[j]==target and i!=j:
-                    return [i,j]
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        hashm = {}
+        for i, x in enumerate(nums):
+            if x in hashm:
+                return [hashm[x],i]
+            else:
+                hashm[target-x] = i
+                
+                
+                
+        
+        
+        
