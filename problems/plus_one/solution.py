@@ -1,17 +1,26 @@
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
         
-        # 4, 9 , 9
-        # 5 0 0 
-        # [9,9]
-        # [1,0,0]
-        for i in range(len(digits)):
-            replace = len(digits) -i - 1
-            if digits[replace] == 9:
-                digits[replace] = 0
-            else:
-                digits[replace] += 1
-                
-                return digits
+        # no need to check for non-empty
         
+        #increase one to integer
+        # sig. digit is at head of list, and no leading 0 except 0 itself
+        
+        # return arry with incrementation
+        
+        
+        # Plan
+        
+        # Loop through array
+        # if 9 at the end, change to a 0 else change last digit to + 1
+        # 
+        for i in range(len(digits)):
+            index = len(digits)-1-i
+            #print(index)
+            if digits[index] == 9:
+                digits[index] = 0
+            else:
+                digits[index] += 1
+                print(digits)
+                return digits
         return [1] + digits
