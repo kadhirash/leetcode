@@ -12,22 +12,23 @@ class Solution:
         ans = [ ]
         while matrix:
 
-            # top
+            # top row
             ans.extend(matrix.pop(0)) 
             print(f'Top matrix extend : {ans}\n')
             
-            #right
+            #right col
             if matrix:
                 for i in range(len(matrix)):
                     if matrix[i]:
                         ans.append(matrix[i].pop())
                         print(f'Right matrix append: {ans}')
-            #bottom
+                        
+            #bottom row
             if matrix:
                 ans.extend(matrix.pop()[::-1])
                 print(f'Bottom matrix extend : {ans}')
             
-            #left
+            #left col
             if matrix:
                 for i in range(len(matrix)-1,-1,-1):
                     if matrix[i]:
