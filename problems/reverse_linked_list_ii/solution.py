@@ -12,24 +12,22 @@ class Solution:
         while m > 1:
             prev = curr
             curr = curr.next
-            m -= 1
-            n -=1
+            m, n = m-1, n-1
             
-        connect = prev
-        tail = curr
+        con, tail = prev, curr
         
         while n > 0:
-            next_node = curr.next
+            third = curr.next
             curr.next = prev
             prev = curr
-            curr = next_node
+            curr = third
             n -= 1
-            
-        if connect != None:
-            connect.next = prev   
+        
+        if con:
+            con.next = prev
         else:
             head = prev
-            
+        
         tail.next = curr
+        
         return head
-            
