@@ -3,10 +3,15 @@ class Solution:
         """
         Do not return anything, modify s in-place instead.
         """
-        def helper(left, right):
-            if left <= right:
-                s[left], s[right] = s[right], s[left]
-                helper(left + 1, right - 1)
-                
-        helper(0, len(s) -1)
+        # 2 pointers 
+        # 1 pointer starts at the front of the string
+        # 1 pointer starts at the back of the string 
+        # increment the front, decrement the back
         
+        front = 0
+        back = len(s)-1 
+        
+        while front < back:
+            s[front],s[back] = s[back], s[front]
+            back -= 1
+            front += 1
