@@ -3,17 +3,18 @@ class Solution:
         if x < 2:
             return x
         
-        left,right = 2, x // 2
+        left, right = 2, x // 2
         
         while left <= right:
-            middle = left + (right-left) // 2
+            mid = left + (right-left) // 2
             
-            num = middle * middle
+            ans = mid * mid
             
-            if num > x:
-                right = middle - 1
-            elif num < x:
-                left = middle + 1
-            elif num == x:
-                return middle
+            if ans == x:
+                return mid
+            elif ans < x:
+                left = mid + 1
+            elif ans > x:
+                right = mid - 1
+        
         return right
