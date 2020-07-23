@@ -1,10 +1,14 @@
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
-        duplicates = set()
+        # return true if any value appears twice or more, else false
+        
+        
+        hash_set = set()
+        
         
         for num in nums:
-            if num in duplicates:
+            if num in hash_set:
                 return True
             else:
-                duplicates.add(num)
+                hash_set.add(num)
         return False
