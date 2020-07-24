@@ -6,12 +6,13 @@
 
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
-        try:
-            slow = head
-            fast = head.next
-            while slow is not fast:
-                slow = slow.next
-                fast = fast.next.next #pos is pointing to
-            return True
-        except:
+        if head == None or head.next == None:
             return False
+        
+        slow, fast = head, head.next
+        
+        while slow != fast:
+            if fast == None or fast.next == None:
+                return False
+            slow,fast = slow.next, fast.next.next
+        return True
