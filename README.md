@@ -9,5 +9,3 @@ As of June 2020, I plan to use Python as I find it less verbose and easier to ar
 Here is my current [profile](https://leetcode.com/kaddy/)
 
 I have split the problems by difficulty in separate folders, and tried to categorize them by concept as well.
-
-
