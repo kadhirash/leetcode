@@ -1,7 +1,18 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        with_alert, without_alert = 0,0
-        for i in nums:
-            with_alert, without_alert = without_alert + i, max(with_alert,without_alert)
-        return max(without_alert,with_alert)
+        '''
+        n(0) = nums[0]
+        n(1) = max(num[0], num[1])
+        n(k) = max(n(k-2) + nums[k], n(k-1))
+        '''
+        if not nums: 
+            return 0
+        if len(nums) == 1: 
+            return nums[0]
         
+        robber = [0] * len(nums)
+        robber[0] = nums[0]
+        robber[1] = max(nums[0], nums[1])
+        for i in range(2, len(nums)):
+            robber[i] = max(nums[i] + robber[i-2], robber[i-1])
+        return robber[-1] 
