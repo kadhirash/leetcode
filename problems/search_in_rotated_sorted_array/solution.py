@@ -15,12 +15,14 @@ class Solution:
             if nums[mid] == target:
                 return mid
             elif nums[mid] > nums[right]: # left sorted
-                if nums[left] <= target and target <= nums[mid]: #answer on left
+                if nums[left] <= target and target <= nums[mid]: # answer on left
+                #if nums[left] <= nums[mid]:
                     right = mid - 1
                 else:
                     left = mid + 1
             else:
-                if nums[mid] <= target and target <= nums[right]: #answe on right
+                if nums[mid] <= target and target <= nums[right]: # answer on right
+                #if nums[mid] <= nums[right]:
                     left = mid + 1
                 else:
                     right = mid - 1
