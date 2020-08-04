@@ -5,27 +5,24 @@ class Solution:
         :type target: int
         :rtype: bool
         """
-        if len(matrix) == 0 or len(matrix[0]) == 0:
-                    return False
-
-        # cache these, as they won't change.
-        height = len(matrix)
-        width = len(matrix[0])
-
-        # start our "pointer" in the bottom-left
-        row = height-1
-        col = 0
-
-        while col < width and row >= 0:
-            if matrix[row][col] > target:
-                row -= 1 # reduce row
-            elif matrix[row][col] < target:
-                col += 1 #reduce col
-            else:
+        # Naive approach
+        # TC: O(nm), SC: O(1)
+        # for row in matrix:
+        #     if target in row:
+        #         return True
+        # return False
+        
+        # Binary Search
+        # TC: O(logn!), SC: O(1)
+        if not matrix or len(matrix) == 0 or len(matrix[0]) == 0:
+            return False
+        row,col = 0, len(matrix[0]) - 1
+        while row < len(matrix) and col >= 0:
+            if matrix[row][col] == target:
                 return True
-
+            elif matrix[row][col] >target:
+                col -= 1
+            else:
+                row += 1
         return False
-
-  
-    
     
