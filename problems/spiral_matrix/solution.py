@@ -1,37 +1,31 @@
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-        # # print top row left to right
-        # top = 0
-        # left = 0
-        # right = n - 1
-        # direction = 0 # 0 --> 3
-        # for i in range(len(matrix)):
-        #     bottom = i - 1
-        #     for j in range(len(matrix[i])):
+        res = [ ]
+        if len(matrix) == 0:
+            return res
+        row_beg, row_end, col_beg, col_end = 0, len(matrix) - 1, 0, len(matrix[0]) - 1
         
-        ans = [ ]
-        while matrix:
-
-            # top row
-            ans.extend(matrix.pop(0)) 
-            print(f'Top matrix extend : {ans}\n')
+        while row_beg <= row_end and col_beg <= col_end:
+            #left -> right
+            for i in range(col_beg, col_end+1):
+                res.append(matrix[row_beg][i])
+            row_beg += 1
             
-            #right col
-            if matrix:
-                for i in range(len(matrix)):
-                    if matrix[i]:
-                        ans.append(matrix[i].pop())
-                        print(f'Right matrix append: {ans}')
-                        
-            #bottom row
-            if matrix:
-                ans.extend(matrix.pop()[::-1])
-                print(f'Bottom matrix extend : {ans}')
+            #right -> bottom
+            for i in range(row_beg, row_end+1):
+                res.append(matrix[i][col_end])
+            col_end -= 1
             
-            #left col
-            if matrix:
-                for i in range(len(matrix)-1,-1,-1):
-                    if matrix[i]:
-                        ans.append(matrix[i].pop(0))
-                        print(f'Left matrix append : {ans}')
-        return ans 
+            #right -> left
+            if row_beg <= row_end:
+                for i in range(col_end, col_beg-1, -1):
+                    res.append(matrix[row_end][i])
+            row_end -= 1
+            
+            #bottom -> top
+            if col_beg <= col_end:
+                for i in range(row_end, row_beg-1, -1):
+                    res.append(matrix[i][col_beg])     
+            col_beg += 1
+            
+        return res
