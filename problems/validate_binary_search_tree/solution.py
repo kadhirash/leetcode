@@ -10,24 +10,20 @@ class Solution:
         if root is None:
             return True
         
+        s = []
+        prev = None
         
-        def checker(root: TreeNode, check_one: [], check_two: []) -> bool:
-            if root is None:
-                return True
+        while root != None or len(s) != 0:
+            while root != None:
+                s.append(root)
+                root = root.left
             
-            for i in check_one:
-                if root.val >= i:
-                    return False
-            for i in check_two:
-                if root.val <= i:
-                    return False
-                
-            if not root.left and not root.right:
-                return True
+            root = s[-1] 
+            s.pop()
+            if prev != None and prev.val >= root.val:
+                return False
+            prev = root
+            root = root.right
             
-            return checker(root.left, check_one + [root.val], check_two) and checker(root.right, check_one, check_two + [root.val])
-
-        if checker(root.left, [root.val], []) and checker(root.right, [], [root.val]):
-            return True
-        else:
-            return False
+            
+        return True
