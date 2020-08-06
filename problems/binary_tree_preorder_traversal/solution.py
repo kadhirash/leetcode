@@ -6,16 +6,24 @@
 #         self.right = right
 class Solution:
     def preorderTraversal(self, root: TreeNode) -> List[int]:
-        if not root:
-            return [ ]
-        order, ans = [ ], [root]
+        # # recursive
+        # def recursive(root: TreeNode) -> List[int]:
+        #     if not root: return None
+        #     res.append(root.val)
+        #     recursive(root.left)
+        #     recursive(root.right)
+        # res = []
+        # recursive(root)
+        # return res
         
-        while ans:
-            popped = ans.pop()
-            #print(popped)
-            order.append(popped.val)
-            if popped.right:
-                ans.append(popped.right)
-            if popped.left:
-                ans.append(popped.left)
-        return order
+        #iterative
+        preorder, stack = [], []
+        if not root: return None
+        while root or stack:
+            while root:
+                stack.append(root)
+                preorder.append(root.val)
+                root = root.left
+            root = stack.pop()
+            root = root.right
+        return preorder       
