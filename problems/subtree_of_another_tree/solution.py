@@ -7,26 +7,11 @@
 class Solution:
     def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
         if not s: return False
-        if self.sameTree(s,t):
-            return True
-        else:
-            left = self.isSubtree(s.left, t)
-            right = self.isSubtree(s.right, t)
-            return left or right
-    def sameTree(self, node1: TreeNode, node2: TreeNode) -> bool:
-        if node1 != None and node2 != None:
-            if node1.val == node2.val:
-                left = self.sameTree(node1.left, node2.left)
-                right = self.sameTree(node1.right, node2.right)
-                return left and right
-            else:
-                return False
-        else:
-            if not node1 and not node2:
-                return True
-            return False
-        
-        
-        
-    
-    
+        elif self.isSametree(s,t): return True
+        else: return self.isSubtree(s.left,t) or self.isSubtree(s.right,t)
+            
+            
+    def isSametree(self, s: TreeNode, t: TreeNode) -> bool:
+        if not s or not t: return s == None and t == None
+        elif s.val == t.val: return self.isSametree(s.left, t.left) and self.isSametree(s.right, t.right)
+        else: return False
