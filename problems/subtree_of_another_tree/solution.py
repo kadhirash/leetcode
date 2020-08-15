@@ -6,9 +6,8 @@
 #         self.right = right
 class Solution:
     def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
-      # preorder/iterative: TC: O(m+n), SC: O(max(m,n))
         tree1, tree2 = self.preorder(s), self.preorder(t)
         return tree2 in tree1
-    def preorder(self, t: TreeNode) -> str:
+    def preorder(self, t: TreeNode) -> bool:
         if not t: return "None"
         return "#" + str(t.val) + " " + self.preorder(t.left) + " " + self.preorder(t.right)
