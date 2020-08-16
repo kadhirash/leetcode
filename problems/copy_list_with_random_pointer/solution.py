@@ -9,4 +9,4 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: 'Node') -> 'Node':
-        return copy.deepcopy(head)
+        return deepcopy(head)
