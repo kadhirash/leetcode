@@ -6,8 +6,12 @@
 #         self.right = right
 class Solution:
     def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
-        tree1, tree2 = self.preorder(s), self.preorder(t)
-        return tree2 in tree1
-    def preorder(self, t: TreeNode) -> bool:
-        if not t: return "None"
-        return "#" + str(t.val) + " " + self.preorder(t.left) + " " + self.preorder(t.right)
+        if not s: return False
+        elif self.isSametree(s,t): return True
+        else: return self.isSubtree(s.left,t) or self.isSubtree(s.right,t)
+            
+            
+    def isSametree(self, s: TreeNode, t: TreeNode) -> bool:
+        if not s or not t: return s == None and t == None
+        elif s.val == t.val: return self.isSametree(s.left, t.left) and self.isSametree(s.right, t.right)
+        else: return False
