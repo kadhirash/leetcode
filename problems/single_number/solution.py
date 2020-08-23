@@ -1,8 +1,17 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        # find the number that doesn't appear twice
-        
-        ans = 0
+        if not nums: return None
+        ans = {}
         for i in nums:
-            ans ^= i
-        return ans
+            if i in ans:
+                ans[i] += 1
+            else:
+                ans[i] = 1
+        for i in ans:
+            if ans[i] == 1:
+                return i
+        return None
+    
+    
+    
+   
