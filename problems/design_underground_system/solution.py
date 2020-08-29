@@ -1,46 +1,25 @@
 import collections
+from collections import defaultdict
 class UndergroundSystem:
 
     def __init__(self):
-        self.user = collections.defaultdict(list)
-        self.dest = collections.defaultdict(list)
+        self.check_in_data = collections.defaultdict(list)
+        self.travel_data = collections.defaultdict(list)
 
-    def checkIn(self, id, stationName, t):
-        """
-        :type id: int
-        :type stationName: str
-        :type t: int
-        :rtype: None
-        """
-        self.user[id] = [stationName, t]
+    def checkIn(self, id: int, stationName: str, t: int) -> None:
+        self.check_in_data[id] = [stationName,t]
 
-    def checkOut(self, id, stationName, t):
-        """
-        :type id: int
-        :type stationName: str
-        :type t: int
-        :rtype: None
-        """
-        start_station, prev_time = self.user[id]
-        self.dest[(start_station, stationName)].append(t-prev_time)
+    def checkOut(self, id: int, stationName: str, t: int) -> None:
+        start_station, prev_time = self.check_in_data[id]
+        route = start_station + stationName
+        return self.travel_data[route].append(t-prev_time) 
 
-    def getAverageTime(self, startStation, endStation):
-        """
-        :type startStation: str
-        :type endStation: str
-        :rtype: float
-        """
-        total_time = total_trips = self.dest[(startStation,endStation)]
-        return float(sum(total_time)/len(total_trips))
-
-
+    def getAverageTime(self, startStation: str, endStation: str) -> float:
+        route = startStation + endStation
+        return sum(self.travel_data[route])/len(self.travel_data[route])
 
 # Your UndergroundSystem object will be instantiated and called as such:
 # obj = UndergroundSystem()
 # obj.checkIn(id,stationName,t)
 # obj.checkOut(id,stationName,t)
 # param_3 = obj.getAverageTime(startStation,endStation)
-
-
-
-#        return float(sum(self.dest[(startStation,endStation)]))/len(self.dest[(startStation,endStation)])
