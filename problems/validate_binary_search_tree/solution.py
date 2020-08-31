@@ -6,24 +6,19 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
+        ans = []
         
-        if root is None:
-            return True
+        self.in_order(root, ans)
         
-        s = []
-        prev = None
-        
-        while root != None or len(s) != 0:
-            while root != None:
-                s.append(root)
-                root = root.left
-            
-            root = s[-1] 
-            s.pop()
-            if prev != None and prev.val >= root.val:
+        for i in range(1,len(ans)):
+            if ans[i-1] >= ans[i]:
                 return False
-            prev = root
-            root = root.right
-            
-            
         return True
+    
+    def in_order(self, node: TreeNode, output: List[int]) -> None:
+        if not node:
+            return 
+        
+        self.in_order(node.left, output)
+        output.append(node.val)
+        self.in_order(node.right, output)
