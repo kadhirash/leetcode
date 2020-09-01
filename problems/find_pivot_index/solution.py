@@ -8,6 +8,7 @@ class Solution:
             pivot = nums[i]
             if i != 0:     
                 left_sum += nums[i-1]
-            if (total_sum - left_sum - pivot) == left_sum:
+            right_sum = total_sum - left_sum - nums[i]
+            if left_sum == right_sum:
                 return i
         return -1
