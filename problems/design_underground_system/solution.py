@@ -3,18 +3,17 @@ from collections import defaultdict
 class UndergroundSystem:
 
     def __init__(self):
-        self.check_in_data = collections.defaultdict(list)
+        self.check_data = collections.defaultdict(list)
         self.journey_data = collections.defaultdict(list)
     def checkIn(self, id: int, stationName: str, t: int) -> None:
-        self.check_in_data[id] = [stationName,t]
-
+        self.check_data[id] = [stationName,t]
     def checkOut(self, id: int, stationName: str, t: int) -> None:
-        start_station,prev_time = self.check_in_data[id]
+        start_station, prev_time = self.check_data[id]
         route = start_station + stationName
         return self.journey_data[route].append(t-prev_time)
-
     def getAverageTime(self, startStation: str, endStation: str) -> float:
         route = startStation + endStation
+        
         return sum(self.journey_data[route]) / len(self.journey_data[route])
 
 
