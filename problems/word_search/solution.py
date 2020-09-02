@@ -6,21 +6,16 @@ class Solution:
                     return True
         return False
     
-    
     def dfs(self,board,row,col,word,i):
         if i == len(word): return True
-        # validation check 
         if row < 0 or col < 0 or row >= len(board) or col >= len(board[0]) or board[row][col] != word[i]: return False
         
-        curr_state = board[row][col]
-        # mark visited
-        board[row][col] = '#'
-        ans = self.dfs(board,row+1,col,word,i+1) or \
-        self.dfs(board,row-1,col,word,i+1) or \
-        self.dfs(board,row,col+1,word,i+1) or \
-        self.dfs(board,row,col-1,word,i+1)
+        state = board[row][col]
         
-        #reset state
-        board[row][col] = curr_state
+        board[row][col] = ''
+        
+        ans = self.dfs(board,row+1,col,word,i+1) or self.dfs(board,row-1,col,word,i+1) or self.dfs(board,row,col+1,word,i+1) or self.dfs(board,row,col-1,word,i+1)
+        
+        board[row][col] = state
         
         return ans
