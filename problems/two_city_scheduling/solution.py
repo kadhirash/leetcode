@@ -1,12 +1,13 @@
 class Solution:
     def twoCitySchedCost(self, costs: List[List[int]]) -> int:
-        city_a, diff = [], []
-        for i, j in costs:
-            city_a.append(i)
-        for i, j in costs:
-            diff.append(j-i)
+        first_city= []
+        for city_one,city_two in costs:
+            first_city.append(city_one)
+        diff = []
+        for city_one, city_two in costs:
+            diff.append(city_two-city_one)
+            
         refund = diff.sort()
-        refund = diff[:len(costs) // 2]
-        return sum(city_a + refund)
-
+        refund = diff[:len(costs)//2]
         
+        return sum (first_city + refund)
