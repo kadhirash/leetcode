@@ -5,30 +5,44 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        stack_1, stack_2 = [],[]
-        temp1 = l1
+        # create two stacks
+        stack_one, stack_two = [], []
+        
+        # add ListNode values to both stacks
         while l1:
-            stack_1.append(l1.val)
+            stack_one.append(l1.val)
             l1 = l1.next
-        temp1 = l2
         while l2:
-            stack_2.append(l2.val)
+            stack_two.append(l2.val)
             l2 = l2.next
         
-        carry, ans, head = 0, [], ListNode(-1)
-        while stack_1 or stack_2:
-            if not stack_1:
-                val = stack_2.pop()
-            elif not stack_2:
-                val = stack_1.pop()
-            else:
-                val = stack_1.pop() + stack_2.pop()
-            carry,val = divmod(carry+val, 10)
-            head.val = val
-            temp = head
-            head = ListNode(-1)
-            head.next = temp
-        if carry:
-            head.val = carry
-        return head if head.val != -1 else head.next
+        # sum_carry variable to hold the sum AND carry
+        sum_carry = 0
+        ans = ListNode(0) # create a ListNode pointer to hold the ans
+        
+        # while values exist in either stack
+        while len(stack_one) > 0 or len(stack_two) > 0:
+            # if value exists in first stack, pop off value and add to sum_carry
+            if len(stack_one) > 0:
+                sum_carry += stack_one.pop()
+                
+            if len(stack_two) > 0:
+                sum_carry += stack_two.pop()
+                
+            
+            # get the value of carry and hold it in the ans.val
+            ans.val = sum_carry % 10 
+            # create head node to store carry
+            head = ListNode(sum_carry // 10)
+            # swap head node and ans
+            head.next = ans
+            ans = head
+            
+            sum_carry //= 10 # store carry in sum_carry
+            
+        if ans.val == 0: # if ans = 0, return ans.next 
+            return ans.next
+        else:
+            return ans
+            
             
