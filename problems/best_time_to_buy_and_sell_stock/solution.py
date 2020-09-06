@@ -1,29 +1,25 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        # loop through list of prices
-        # find where it's the lowest and mark it as BUY
-        # find after that point where it's the largest and mark that as SELL
-        # SELL-BUY = PROFIT 
+        # day i = price of a stock[i]
+        # can't sell stock before you buy one
         
         
-        #TLE due to last case 
-        # max_profit = 0
-        # for i in range(len(prices)):
-        #     for j in range(i+1, len(prices)):
-        #         min_price = prices[j] - prices[i]
-        #         if(min_price > max_profit):
-        #             max_profit = min_price
-        # return max_profit
+        # profit: buy stock - sell price, sell price > buying price
         
         
-        min_price = float('inf')
-        max_profit = 0
+        # min. val variable = float('inf')
+        # max. profit value = 0
         
-        for i in prices:
-            min_price = min(min_price, i)
-            #print(min_price)
-            curr_profit = i - min_price
-            #print(curr_profit) # 1, 2, 3, 4, 5
-            max_profit = max(max_profit, curr_profit)
-            #print(max_profit)
+        sell_price, max_profit = float('inf'), 0
+        
+        
+        # iterate through the prices
+        
+        for stock in prices:
+            # update the sell_price, which is min(sell price and stock)
+            sell_price = min(sell_price, stock) # 7,1,1,1,1, 1 
+            profit = stock - sell_price # 7-7 = 0, 1-1 = 0 , 5-1 = 4, 3-1 = 2, 6 - 1 = 5, 4-1 = 3
+            max_profit = max(max_profit, profit) # 0, 0,4, 4, 5, 5 
         return max_profit
+            
+        
