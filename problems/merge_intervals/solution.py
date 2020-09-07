@@ -9,5 +9,15 @@ class Solution:
             # otherwise, there is overlap, so we merge the current and previous
             # intervals.
                 merged[-1][1] = max(merged[-1][1], interval[1])
-
         return merged
+    
+    # 1 2 3 4 5 
+    # -------
+    #       ---
+    # ----------
+    
+    # [1,4], [4,5]
+    
+    # merged = [[1,4]]
+    
+    # merged = [[1]]
