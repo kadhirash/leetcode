@@ -3,7 +3,8 @@ class Solution:
         ans = {}
         for i in range(len(nums)):
             comp = target - nums[i]
+            
             if comp in ans:
-                return ans[comp],i
+                return ans[comp], i
             else:
                 ans[nums[i]] = i
