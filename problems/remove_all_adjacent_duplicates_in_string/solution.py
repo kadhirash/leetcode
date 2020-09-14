@@ -1,27 +1,27 @@
 class Solution:
     def removeDuplicates(self, S: str) -> str:
-        # remove the 2 adjacent and equal letters until no more duplicates
-        
-        # Clarification:
-            # S = lowercase letters
-        
+        # Clarifications:
+            # S is all lowercase letters
+            # each answer is unique
+        # To Do:
+            # return S w/o duplicates
         # Example:
             # abbaca
                 # aaca
                 # ca
-        # WalkThrough:
-            # create a stack to hold answer -> O(n-d) space
-            # in stack, add string chars
-                # if the last string char on stack == next string char, then pop 
-            # repeating until no more can be removed
-            # return as a string form
-            
+        # Strategy:
+            # Use a stack to store the answer 
+            # Iterate through the string, and check top char of stack with the next char
+                # if same then pop off (abb)
+            # else, append to stack
+            # return answer as string! 
+                # ''.join -> python
         
-        i,n = 0,len(S)
-        res = list(S)
-        for j in range(n):
-            res[i]=res[j]
-            if i>0 and res[i-1]==res[j]:
-                i-=2
-            i+=1
-        return ''.join(res[:i])
+    
+        ans = []
+        for char in S:
+            if ans and ans[-1] == char:
+                ans.pop()
+            else:
+                ans.append(char)
+        return ''.join(ans)
