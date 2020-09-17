@@ -6,38 +6,39 @@
 #         self.right = right
 class Solution:
     def rightSideView(self, root: TreeNode) -> List[int]:
-        # use a stack to store nodes
-        # SOLUTION FAILS, ONLY GETS RIGHT NODES, but you want all nodes you see from right side
-#         if not root:
-#             return [ ]
-#         ans = [ ]
-#         ans.append(root.val)
+        # dfs level by level, but only collecting the right side nodes
+        # bfs 
         
-#         while root.right:
-#             ans.append(root.right.val)
-#             root = root.right
-#         return ans
-#left_sub_nodes[len(right):]
-
-# strategy 2: collect all nodes level traversal, use stack
         
-        if not root: # if root is None
-            return [ ] # return empty stack
-        ans = [ ]
-        ans.append(root.val) # append root val to this
-        #print(ans)
-        # right view of left sub tree
-        left_sub_nodes = ans + self.rightSideView(root.left)
-        print(f' right view, left sub tree nodes: {left_sub_nodes}')
-        #right view of right sub tree
-        right_sub_nodes = ans + self.rightSideView(root.right)
-        print(f' right view, right sub tree nodes: {right_sub_nodes}')
-        # after getting both sides of the nodes, combine them
-        #print(len(right_sub_nodes))
-        #return right_sub_nodes + left_sub_nodes # prints extra nodes
+#         if not root: return None
         
-        # have extra variable for blocked view on the left sub_tree to only get non blocked nodes 
-        skip_block = left_sub_nodes[len(right_sub_nodes):]
-        # print(f'skip block: {skip_block}')
-        return right_sub_nodes + skip_block
+#         right_side = []
+#         stack = [(root,0)] # root, level
         
+#         while stack:
+#             node,level = stack.pop() # pop off the node and its corresponding level
+#             if node:
+#                 if len(right_side) <= level: # if right_side values are less than the current level, then add to it
+#                     right_side.append(node.val)
+#                 stack.append((node.left,level+1))
+#                 stack.append((node.right,level+1))
+#         return right_side
+            
+            if not root: return None
+            
+            right_side = []
+            queue = deque([root,]) # queue 
+            
+            while queue:
+                level_len = len(queue)
+                
+                for i in range(level_len):
+                    node = queue.popleft() # pop off nodes from the front of queue -> O(1) time
+                    if i == level_len - 1: # i == right_side level
+                        right_side.append(node.val)
+                        
+                    if node.left:
+                        queue.append(node.left)
+                    if node.right:
+                        queue.append(node.right)
+            return right_side
