@@ -1,24 +1,17 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         
+        
         seen = {}
-        anchor = length = 0
+        if not s: return 0
         
-        for i in range(len(s)):
-            if s[i] in seen and seen[s[i]] >= anchor:
-                anchor = seen[s[i]] + 1
+        anchor = max_len = 0
+        
+        for char in range(len(s)):
+            if s[char] in seen and seen[s[char]] >= anchor:
+                anchor = seen[s[char]] + 1
             else:
-                length = max(length, i-anchor + 1)
-            seen[s[i]] = i
-        return length
-        
-        # encountered = {}
-        # anchor = length = 0
-        # for i, e in enumerate(s):
-        #     if e in encountered and encountered[e] >= anchor:
-        #         anchor = encountered[e] + 1
-        #     else:
-        #         length = max(length, i-anchor + 1)
-        #     encountered[e] = i
-        # return length
-        
+                max_len = max(max_len, char - anchor + 1)
+            seen[s[char]] = char
+            
+        return max_len
