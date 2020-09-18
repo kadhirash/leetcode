@@ -8,27 +8,30 @@ class Node:
         self.child = child
 """
 '''
-stack = [--4---5---6--NULL]
+stack = [ ]
+1---2---3 <-> 7---8<--->11--12<--->--9<---10-->-4---5---6--NULL,
 
 
-1---2---3- 7---8-11--12--NULL--9---10--NULL
 '''
 class Solution:
     def flatten(self, head: 'Node') -> 'Node':
-        if not head:
-            return head
-        temp = head
-        stack = []
-        while head:
-            if head.child:
-                if head.next:
-                    stack.append(head.next)
-                head.next = head.child
-                head.next.prev = head
-                head.child = None
-            elif not head.next and stack:
-                head.next = stack.pop()
-                head.next.prev = head
-            head = head.next
-        return temp
+        if not head: return head
+        
+        pseudo_head = Node(None,None, head,None)
+        self.flatten_dfs(pseudo_head, head)
+        
+        pseudo_head.next.prev = None
+        return pseudo_head.next
+    
+    def flatten_dfs(self, prev,curr):
+        if not curr: return prev # tail of flatten list
+        
+        curr.prev = prev
+        prev.next = curr 
+        
+        temp_next = curr.next
+        tail = self.flatten_dfs(curr, curr.child)
+        curr.child = None
+        return self.flatten_dfs(tail, temp_next)
+        
         
