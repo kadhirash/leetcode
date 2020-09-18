@@ -1,4 +1,5 @@
 class Solution:
+    import heapq
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
         # Clarifications:
             # not sorted
@@ -10,27 +11,28 @@ class Solution:
         # Strategy:
             # use a min heap -> "min" # of rooms
             # sort by the start times
-            # iterate through the intervals
-                # if the prev meetings end time > curr meeting start time
+            # iterate through the intervals starting at 1
+                # if the curr heap start_time <= index[0]
                     # create a new room, push curr meeting end time to heap (now top element)
                 # else: pop
             # return len of minheap
             
-            
-            
-            
-        import heapq    
         if not intervals: return 0
-        intervals.sort(key = lambda x : x[0])
         
-        ans = [] 
+        rooms = [] # minheap
         
-        heapq.heappush(ans, intervals[0][1]) # end time
+        intervals.sort(key = lambda x:x[0]) # sort rooms by start time
         
-        for meeting_time in intervals[1:]:
-            if ans[0] <= meeting_time[0]:
-                 heapq.heappop(ans)
-            heapq.heappush(ans,meeting_time[1])
-        return len(ans)        
         
+        heapq.heappush(rooms, intervals[0][1]) # [ [[0, 30],[5, 10],[15, 20]] ]
+        
+        for meeting_times in range(1,len(intervals)):
+            if rooms[0] <= intervals[meeting_times][0]:
+                heapq.heappop(rooms)
+            heapq.heappush(rooms,intervals[meeting_times][1])
+        return len(rooms)
+        
+        
+            
+            
         
