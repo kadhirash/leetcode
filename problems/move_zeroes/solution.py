@@ -1,10 +1,11 @@
 class Solution:
-    def moveZeroes(self, nums: List[int]) -> None:
+    def moveZeroes(self, arr: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
         """
-        anchor = 0
-        for i, value in enumerate(nums):
-            if nums[i] != 0:
-                nums[i], nums[anchor] = nums[anchor], nums[i]
-                anchor += 1
+        zero = 0 
+        for i in range(len(arr)):
+            if arr[i] != 0:
+                if i != zero:
+                    arr[i], arr[zero] = arr[zero], arr[i]
+                zero += 1
