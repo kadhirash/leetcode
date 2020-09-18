@@ -11,6 +11,7 @@ class UndergroundSystem:
         start_station,start_time = self.check_in_data.pop(id) 
         self.journey_data[(start_station,stationName)][0] += (t-start_time) 
         self.journey_data[(start_station,stationName)][1] += 1
+        
     def getAverageTime(self, startStation: str, endStation: str) -> float:
         total_time, total_trips = self.journey_data[(startStation,endStation)]
         return total_time / total_trips
