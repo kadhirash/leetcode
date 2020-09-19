@@ -1,22 +1,36 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
+        # clarifications:
+            # same length for s and t
+            # it is valid if none
+            
         # todo:
-            # true if t is anagram of s
+            # return if t is anagram of s
+        
         # strat:
-            # if len(s) != len(t) return False
-            # keep a hashmap of integer values of the chars in s and t
-                # increment s, decrement t
-                # if len != 0 return False, else True
+            # check to see if s / t exist
+            # check the lengths of s and t
+            
+            # iterate through s, use a hashmap(defaultdict[int]) to store values
+                # delete characs
+                # incr. chars in t
+            # 
+        # complexities:
+            # time: O()
+            # space: O()
+            
+            
+        if not s or not t: return True
         
         if len(s) != len(t): return False
         
-        anagram = defaultdict(int)
+        anag = defaultdict(int) 
         
         for char in range(len(s)):
-            anagram[s[char]] += 1
-            anagram[t[char]] -= 1
-            
-        for values in anagram:
-            if anagram[values] != 0:
+            anag[s[char]] += 1
+            anag[t[char]] -= 1
+        
+        for values in anag:
+            if anag[values] != 0: # 1, -1, so on 
                 return False
         return True
