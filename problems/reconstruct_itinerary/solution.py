@@ -1,23 +1,29 @@
 class Solution:
-    def dfs(self,airport):
-        while self.adj_list[airport]:
-            person = self.adj_list[airport].pop(0)
-            self.dfs(person)
-        self.ans.append(airport)
-    
-    
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
-        self.ans = []
-        self.adj_list = defaultdict(list)
+        # strat:
+            # use a DFS 
+            
+            # iterate through ticks
+                # create an adj .list between the airports
+            # sort them lexicographically
         
+            
+        ans = []
+        adj_list = defaultdict(list)
         for i,j in tickets:
-            self.adj_list[i].append(j) # from --> to
-            
-        # sort lexico. by the keys in adj. list
-        for keys in self.adj_list:
-            self.adj_list[keys].sort()
-            
+            adj_list[i].append(j)
         
-        self.dfs("JFK")
         
-        return reversed(self.ans)
+        for keys in adj_list:
+            adj_list[keys] = sorted(adj_list[keys])
+        
+        def dfs(airport):
+            while adj_list[airport]:
+                person = adj_list[airport].pop(0)
+                dfs(person)
+            ans.append(airport)
+            
+        dfs("JFK")
+        
+        return reversed(ans)
+        
