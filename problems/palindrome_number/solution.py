@@ -1,33 +1,30 @@
 class Solution:
     def isPalindrome(self, x: int) -> bool:
-        # todo
-            # return true if number is palindrome
-        # ex:
-            # 121
-            # True 
         # strat:
-            # reverse half the number 
-            # if x < 0: False
-            # pal = x
-                # while pal:
-                    # 121 % 10 --> 1 
-                    # 121 // 10 -> 12
+            # reverse half the numbers -> O(logn)
+                # compare 1/2 with other 1/2
+                # pop modulo operator 10 -> pop off the last digit
+                # multiply the number * 10 
+                    # sum of mult + pop
+                # divide num // 10
+            # if negative, not 0, and ends with 0: return False
+        # ex:
+            # 12321 
         
         
-    
-        pal = x
-        pop = 0
         
         
-        if x < 0: return False
-        if x >= 0 and x < 10: return True
+        if x < 0 or (x != 0 and x % 10 == 0):
+            return False
         
         
-        while pal:
-            pop = pop * 10 + pal % 10     # 1     ->  12   -> 121
+        revert_num = 0
+        
+        while x > revert_num:
+            pop = x % 10
+            revert_num = revert_num * 10 + pop
+            x = x // 10
             
-            pal //= 10                    # 12    -> 1
-    
-        return pop == x
         
-        
+        return x == revert_num or x == revert_num//10
+            
