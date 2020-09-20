@@ -8,30 +8,49 @@ class Node:
         self.child = child
 """
 '''
-stack = [ ]
-1---2---3 <-> 7---8<--->11--12<--->--9<---10-->-4---5---6--NULL,
+stack = [---4---5---6--NULL,]
 
+1---2---3<->7---8<-> 11--12----9---10--NULL ..
 
 '''
 class Solution:
-    def flatten(self, head: 'Node') -> 'Node':
-        if not head: return head
-        
-        pseudo_head = Node(None,None, head,None)
-        self.flatten_dfs(pseudo_head, head)
-        
-        pseudo_head.next.prev = None
-        return pseudo_head.next
     
-    def flatten_dfs(self, prev,curr):
-        if not curr: return prev # tail of flatten list
+    def flatten(self, head: 'Node') -> 'Node':
+        # strat:
+            # stack to hold head.next nodes
+            
+        self.recursively_flatten(head)
+        return head
+    
+    # Takes the head of the list to be flattened, and returns the tail of the flattened list.
+    def recursively_flatten(self, head):
         
-        curr.prev = prev
-        prev.next = curr 
+        # Could happen if outer caller passes in an empty list.
+        if head == None:
+            return None
         
-        temp_next = curr.next
-        tail = self.flatten_dfs(curr, curr.child)
-        curr.child = None
-        return self.flatten_dfs(tail, temp_next)
+        # Base case - there is nothing left to flatten.
+        if head.next == None and head.child == None:
+            return head
         
+        # Recursive case - we need to flatten the child and the tail.
+        tail = head.next # We need to store this as doing child first.
+        current_end = head # Where will we be attaching next?
+        
+        if head.child != None:
+            child_end = self.recursively_flatten(head.child)
+            self.link(current_end, head.child)
+            current_end = child_end
+            head.child = None
+            
+        if tail != None:
+            tail_end = self.recursively_flatten(tail)
+            self.link(current_end, tail)
+            current_end = tail_end
+            
+        return current_end
+    
+    def link(self, node_1, node_2):
+        node_1.next = node_2
+        node_2.prev = node_1
         
