@@ -5,21 +5,37 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        head = l3 = ListNode(0)
+        l3 = temp = ListNode(0)
         carry = 0
         
-        while carry or l1 or l2:
+        while l1 or l2 or carry:
             if l1:
-                carry += l1.val
-                l1 = l1.next
+                val1 = l1.val 
+            else:
+                val1 = 0
+            
             if l2:
-                carry += l2.val
+                val2 = l2.val
+            else:
+                val2 = 0
+            
+            curr_sum = val1 + val2 + carry
+            
+            node = ListNode(curr_sum % 10)
+            carry = curr_sum // 10
+            
+            temp.next = node # poiints to curr node
+            temp = temp.next # update temp traversal
+            
+            if l1:
+                l1 = l1.next
+            else:
+                l1 = None
+                
+            if l2:
                 l2 = l2.next
+            else:
+                l2 = None
+                
+        return l3.next
             
-            l3.val = carry % 10
-            carry //= 10
-            
-            if carry or l1 or l2:
-                l3.next = ListNode(0)
-                l3 = l3.next
-        return head
