@@ -1,14 +1,18 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
-        wordSet =set(wordDict)
-        @functools.lru_cache
-        def dfs(start: int):
-            if start == len(s):
-                return [[]]
+        dp = {}
+        def word_break(s):
+            if s in dp: return dp[s]
             res = []
-            for i in range(start, len(s)):
-                if s[start:i+1] in wordSet:
-                    res += [[s[start:i+1]] + child for child in dfs(i+1)]
+            for w in wordDict:
+                if s[:len(w)] == w:
+                    if len(w) == len(s):
+                        res.append(w)
+                    else:
+                        temp = word_break(s[len(w):])
+                        for t in temp:
+                            res.append(w + " " + t)
+            dp[s] = res
             return res
-        return [" ".join(line) for line in dfs(0)]
+        return word_break(s)
     
