@@ -1,8 +1,22 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
+        # seen hashmap
+        # anchor, max_len
+        # iterate through s
+            # if char in seen and seen >= anchor
+                # update anchor 
+            #else
+                # update max_len
+            # update seen
+        # return max_len
+        
+        
+        if not s: 
+            return 0
+        
         seen = {}
+        
         anchor = max_len = 0
-        if not s: return 0
         
         for char in range(len(s)):
             if s[char] in seen and seen[s[char]] >= anchor:
