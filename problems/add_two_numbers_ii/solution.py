@@ -5,44 +5,41 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        # create two stacks
-        stack_one, stack_two = [], []
+        # 2 stacks
+            # l1/l2
+        # temp ListNode /carry var
         
-        # add ListNode values to both stacks
-        while l1:
-            stack_one.append(l1.val)
-            l1 = l1.next
-        while l2:
-            stack_two.append(l2.val)
-            l2 = l2.next
         
-        # sum_carry variable to hold the sum AND carry
-        sum_carry = 0
-        ans = ListNode(0) # create a ListNode pointer to hold the ans
         
-        # while values exist in either stack
-        while len(stack_one) > 0 or len(stack_two) > 0:
-            # if value exists in first stack, pop off value and add to sum_carry
-            if len(stack_one) > 0:
-                sum_carry += stack_one.pop()
+        s1, s2 = [], []
+        
+        while l1 or l2:
+            if l1:
+                s1.append(l1.val)
+                l1 = l1.next
+            if l2:
+                s2.append(l2.val)
+                l2 = l2.next
                 
-            if len(stack_two) > 0:
-                sum_carry += stack_two.pop()
-                
+        head = ListNode(0)
+        carry = 0
+        
+        while s1 or s2:
+            if s1:
+                carry += s1.pop()
+            if s2:
+                carry += s2.pop()
             
-            # get the value of carry and hold it in the ans.val
-            ans.val = sum_carry % 10 
-            # create head node to store carry
-            head = ListNode(sum_carry // 10)
-            # swap head node and ans
-            head.next = ans
-            ans = head
-            
-            sum_carry //= 10 # store carry in sum_carry
-            
-        if ans.val == 0: # if ans = 0, return ans.next 
-            return ans.next
+            head.val = carry % 10
+            temp = ListNode (carry // 10) 
+            temp.next = head
+            head = temp
+            carry //=10
+        if head.val == 0:
+            return head.next
         else:
-            return ans
+            return head
             
             
+        
+        
