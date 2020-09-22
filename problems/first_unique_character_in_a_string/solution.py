@@ -1,32 +1,18 @@
 class Solution:
     def firstUniqChar(self, s: str) -> int:
-        # only lowercase letters
+        # using a hashmap to keep track of indexes
         
+        ans = {}
         
-        #strat:
-            # use a hashmap to keep track of the indexes 
-            # iterate through chars of s
-                # add it to the hashmap
-                    # if the value is !=0, return the first occurence
+        for count, letter in enumerate(s):
             
-        # example:
-            #"leetcode"
-                # l: 0
-                # e: 2
-                # t: 0
-                # c: 0
-                # o : 0
-                # d : 0
-        ans = {} 
-        
-        for char in s:
-            if char not in ans:
-                ans[char] = 1
+            if letter not in ans:
+                ans[letter]= 1
             else:
-                ans[char] += 1
+                ans[letter] += 1
                 
-        
-        for char in ans:
-            if ans[char] == 1:
-                return s.index(char)
+        for letter in ans:
+            if ans[letter] == 1:
+                return s.index(letter)
         return -1
+        
