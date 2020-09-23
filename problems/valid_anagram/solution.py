@@ -1,23 +1,27 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
+        # q's:
+            # same length
+            # True 
+        
         # strat:
-            # use a hashmap(defaultdict) to keep track 
+            # check if exists + same size
+            # hashmap to keep track of values in s and t
+                # iterate through s 
+                    # inc through s and dec. through t
         
-        
-        if not s or not t: return True
-        
+        if not s and not t:
+            return True
         if len(s) != len(t):
             return False
         
+        ans = collections.defaultdict(int)
         
-        ans = defaultdict(int)
-        
-        for char in range(len(s)):
-            ans[s[char]] += 1
-            ans[t[char]] -= 1
+        for letters in range(len(s)):
+            ans[s[letters]] += 1
+            ans[t[letters]] -= 1
             
-        
-        for char in ans:
-            if ans[char] != 0:
+        for letters in ans:
+            if ans[letters] != 0:
                 return False
         return True
