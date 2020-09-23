@@ -1,34 +1,35 @@
 import collections
-from collections import defaultdict
+import string
 class Solution:
-    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        # edge cases
-        if not beginWord or not endWord or not wordList:
-            return None
-        
-        combinations = defaultdict(list)
-        for words in wordList:
-            for i in range(len(beginWord)):
-                combinations[words[:i] + "#" + words[i+1:]].append(words)
-        #print(combinations)
-        
-        #bfs
-        queue = deque([(beginWord,1)])
-        #print(queue) #(['hit', 1])
-        visited = {beginWord: True}
+    # string1 = "ABBK"
+    # string2 = "DBCN"
+    # dictionary = {"DBPN", "ABPN", "ABKK", "ABPN", "DCCN", "ABPK" }
+    def ladderLength(self, string1: str, string2: str, dictionary: List[str]) -> int:
+        word_set = set(dictionary)
+        visited = set()
+        queue = collections.deque([(string1,1)]) # string1, length
+        alpha = string.ascii_lowercase
         
         while queue:
-            curr_word, level = queue.popleft()
-            for i in range(len(beginWord)):
-                middle_words = curr_word[:i] + "#" + curr_word[i+1:]
-            #print(middle_words) #      hi#
-        
-                for words in combinations[middle_words]:
-                    if words == endWord:
-                        return level + 1
-                    if words not in visited:
-                        visited[words] = True
-                        queue.append((words,level+1))
-                combinations[middle_words] = []
-    
+            word,length = queue.popleft()
+            size = len(word)
+            
+            if word == string2:
+                return length
+            
+            for i in range(size):
+                
+                for char in alpha:
+                    
+                    new_word = word[:i] + char + word[i+1:]
+                    
+                    if new_word in word_set and new_word not in visited:
+                        
+                        queue.append((new_word,length+1))
+                        visited.add(new_word)
         return 0
+        
+        # O(n * 26* m) 
+            # n = words
+            # m = len(word)
+        # O(n)
