@@ -5,25 +5,23 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-        # pre_node = None
+    prev_node = None
     def isValidBST(self, root: TreeNode) -> bool:
-        # inorder traversal --> sorted
-            # left < root < right
-            
+        
+        if not root: return True
         
         
-        def helper(node, lower = float('-inf'), upper = float('inf')):
-            if not node:
-                return True
-
-            val = node.val
-            if val <= lower or val >= upper:
-                return False
-
-            if not helper(node.right, val, upper):
-                return False
-            if not helper(node.left, lower, val):
-                return False
-            return True
-
-        return helper(root)
+        if not self.isValidBST(root.left):
+            return False
+        
+        if self.prev_node and self.prev_node.val >= root.val:
+            return False
+        
+        self.prev_node = root
+        
+        
+        if not self.isValidBST(root.right):
+            return False
+        
+        
+        return True
