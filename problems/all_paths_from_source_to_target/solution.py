@@ -1,16 +1,14 @@
 class Solution:
-    
-    def dfs(self, curr_node, path):
-        if curr_node == self.N:
-            self.res.append(path)
-        else:
-            for i in self.graph[curr_node]:
-                self.dfs(i, path + [i])
-            
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
-        self.N = len(graph)- 1
-        self.graph = graph
-        self.res = []
-        self.dfs(0, [0])
-        return self.res
-        
+        N = len(graph) - 1
+        paths = [[0]]
+        ans = []
+        while paths:
+            path = paths.pop()
+            top_path = path[-1]
+            for n in graph[top_path]:
+                if n == N:
+                    ans.append(path + [n])
+                else:
+                    paths.append(path + [n])
+        return ans
