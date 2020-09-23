@@ -4,41 +4,29 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+import collections
+from collections import deque
 class Solution:
     def rightSideView(self, root: TreeNode) -> List[int]:
-        # dfs level by level, but only collecting the right side nodes
-        # bfs 
+        ans = []
+        queue = deque()
         
+        if not root: return None
         
-#         if not root: return None
-        
-#         right_side = []
-#         stack = [(root,0)] # root, level
-        
-#         while stack:
-#             node,level = stack.pop() # pop off the node and its corresponding level
-#             if node:
-#                 if len(right_side) <= level: # if right_side values are less than the current level, then add to it
-#                     right_side.append(node.val)
-#                 stack.append((node.left,level+1))
-#                 stack.append((node.right,level+1))
-#         return right_side
+        queue.append(root)
+        while queue:
+            size = len(queue)
             
-            if not root: return None
+            for i in range(size):
+                root = queue.popleft()
+                if i == size - 1:
+                    ans.append(root.val)
+                if root.left:
+                    queue.append(root.left)
+                if root.right:
+                    queue.append(root.right)
+                    
+        return ans
             
-            right_side = []
-            queue = deque([root,]) # queue 
             
-            while queue:
-                level_len = len(queue)
-                
-                for i in range(level_len):
-                    node = queue.popleft() # pop off nodes from the front of queue -> O(1) time
-                    if i == level_len - 1: # i == right_side level
-                        right_side.append(node.val)
-                        
-                    if node.left:
-                        queue.append(node.left)
-                    if node.right:
-                        queue.append(node.right)
-            return right_side
