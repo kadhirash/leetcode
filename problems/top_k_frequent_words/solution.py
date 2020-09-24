@@ -1,22 +1,23 @@
 import collections
 import heapq
-from heapq import heapify, heappush, heappop
 class Solution:
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
+#         For example, your object is something like this in tuple's format (key, value_1, value_2)
+
+# When you put the objects (i.e. tuples) into heap, it will take the first attribute in the object (in this case is key) to compare. If a tie happens, the heap will use the next attribute (i.e. value_1) and so on.
+
+
+        freq_words = collections.Counter(words)
         
-        # count freq. of word and add to heap to store best 'k' candidates
-            # worst candidates at top of heap, then pop off 'k' times and reverse
-            # so best candidates are there
-        count = collections.Counter(words)
-        #print(count) # {'i':2, 'love': 2, 'leetcode': 1, 'coding': 1}
-        heap = [] 
-        for word, freq in count.items():
-            heappush(heap,(-freq,word))
-        # pop top k 
+        heap = []
         
-        res = []        
-        for i in range(k):
-            neg_val, key = heappop(heap)
-            res.append(key)
+        for key , val in freq_words.items():
+            heapq.heappush(heap, (-val, key))
+            
+        res = []
+        for _ in range(k):
+            res.append(heapq.heappop(heap)[-1])
+        
         return res
-        
+                
+            
