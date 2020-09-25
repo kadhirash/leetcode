@@ -4,22 +4,32 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+import collections
 class Solution:
     def levelOrderBottom(self, root: TreeNode) -> List[List[int]]:
-        levels = [ ]
-        next_level = deque([root])
+        if not root: return None
         
-        while root and next_level:
-            curren_level = next_level
-            next_level = deque()
-            levels.append([])
+        ans = collections.deque()
+        queue = collections.deque()
+        
+        queue.append(root)
+        
+        while queue:
+            size = len(queue)
+            root_level = []
             
-            for node in curren_level:
-                levels[-1].append(node.val)
+            for i in range(size):
+                root = queue.popleft()
                 
-                if node.left:
-                    next_level.append(node.left)
-                if node.right:
-                    next_level.append(node.right)
+                root_level.append(root.val)
                 
-        return levels[::-1]
+                if root.left:
+                    queue.append(root.left)
+                    
+                if root.right:
+                    queue.append(root.right)
+                    
+            ans.appendleft(root_level)
+            
+        return ans
+            
