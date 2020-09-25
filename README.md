@@ -9,7 +9,7 @@ I still will have some old C++ and Java solutions from time to time as I know C+
 
 Here is my current [profile](https://leetcode.com/kaddy/)
 
-I found a neat tool from someone's github [url](https://github.com/joshcai/leetcode-sync) to let me sync my leetcode solutions so I don't have to manually update it every time!! 
+I found a neat tool from someone's [github](https://github.com/joshcai/leetcode-sync) to let me sync my leetcode solutions so I don't have to manually update it every time!! 
 
 As the saying goes, 
 
