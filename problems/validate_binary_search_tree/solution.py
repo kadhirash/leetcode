@@ -7,9 +7,8 @@
 class Solution:
     prev_node = None
     def isValidBST(self, root: TreeNode) -> bool:
-        
-        if not root: return True
-        
+        if not root:
+            return True
         
         if not self.isValidBST(root.left):
             return False
@@ -19,9 +18,10 @@ class Solution:
         
         self.prev_node = root
         
-        
         if not self.isValidBST(root.right):
             return False
         
-        
         return True
+    
+    
+    
