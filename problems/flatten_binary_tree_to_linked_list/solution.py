@@ -10,23 +10,25 @@ class Solution:
         Do not return anything, modify root in-place instead.
         """
 
+        if not root: return
         
+    
         
-        
-        def helper(root):
-            if root is None:
-                return None
+        while root:
             
-            if root.left is None and root.right is None:
-                return root
-            
-            lt = helper(root.left)
-            rt = helper(root.right)
-            
-            if lt:
-                lt.right = root.right
+            if root.left:
+                
+                # find rightmost
+                right_most = root.left
+                while right_most.right:
+                    right_most = right_most.right
+                    
+                    
+                # rewire connections
+                right_most.right = root.right
                 root.right = root.left
                 root.left = None
-            
-            return rt if rt else lt
-        return helper(root)
+                
+                
+            # right side of tree
+            root = root.right
