@@ -1,23 +1,61 @@
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
-        # use 2 stacks, 1 for ans and 1 to hold the "(.)"
-        stack, ans = [], []
+        stack, ans = [],[]
+        for c in s:
+            ans.append(c)
+            
         for i in range(len(s)):
-            if s[i] == '(': # if left
-                stack.append(i) # append the index
-                ans.append(s[i])
-            elif s[i] == ')': # if right
-                if stack: # if stack already exists 
-                    stack.pop() # pop off right and append to ans
-                    ans.append(s[i])
-                else:   # else just append space since no matching left
-                    ans.append('') 
-            else: # if neither left or right, then append value to ans
-                ans.append(s[i])
-                
-        for i in stack: # ))((  -> example 3 
-            ans[i] = '' # just give spaces 
+            if s[i] == '(':
+                stack.append(i) # index
+            elif s[i] == ')':
+                if stack:
+                    stack.pop() # remove
+                else:
+                    ans[i] = '#' # add dummy var
         
-        return ''.join(ans)
+        while stack: # all '('
+            ans[stack.pop()] = '#' # set the values to dummy var
+            
+        
+        return ''.join(ans).replace('#',"")
+            
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+#         stack = []
+#         res = []
+#         for c in s:
+#             res.append(c)
+        
+#         for i in range(len(s)):
+#             if s[i] == '(':
+#                 stack.append(i)
+#             elif s[i] == ')':
+#                 if stack:
+#                     stack.pop()
+#                 else:
+#                     res[i] = '#'
+#         while stack: # all open
+#             res[stack.pop()] = '#'
+            
+#         return "".join(res).replace('#',"")
