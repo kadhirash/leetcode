@@ -16,15 +16,19 @@ stack = [---4---5---6--NULL,]
 class Solution:
     
     def flatten(self, head: 'Node') -> 'Node':
-        def fn(node, default=None):
-            """Return head of (recursively) flattened linked list"""
-            if not node: 
-                return default 
-            node.next = fn(node.child, fn(node.next, default))
-            if node.next: 
-                node.next.prev = node
-            node.child = None
-            return node
+        stack = []
+        temp = head
         
-        return fn(head)
+        while head:
+            if head.child:
+                if head.next:
+                    stack.append(head.next)
+                head.next = head.child
+                head.next.prev = head
+                head.child = None
+            elif not head.next and stack:
+                head.next = stack.pop()
+                head.next.prev = head
+            head = head.next
+        return temp
         
