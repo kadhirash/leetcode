@@ -10,6 +10,50 @@ class Solution:
             
         ans = []
         adj_list = defaultdict(list)
+        # created the adj. list
+        for i, j in tickets:
+            adj_list[i].append(j) # from --> to
+            
+        
+        # sort lexicographically
+        for keys in adj_list:
+            adj_list[keys] = sorted(adj_list[keys]) # Onlogn
+        
+        
+        # dfs
+        
+        def dfs(airport):
+            while adj_list[airport]:
+                candidate = adj_list[airport].pop(0)
+                dfs(candidate)
+            ans.append(airport)
+        dfs('JFK')
+        
+        return reversed(ans)
+            
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        ans = []
+        adj_list = defaultdict(list)
         for i,j in tickets:
             adj_list[i].append(j)
         
