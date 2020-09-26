@@ -8,16 +8,20 @@ class Node:
         self.child = child
 """
 '''
-stack = [---4---5---6--NULL,]
+ stack = [ ] 
+ temp   3r
+ 1---2---3 <-> 7---8<->11--12-->---9---10-->---4---5---6--NULL,
+             
+             
+             
 
-1---2---3<->7---8<-> 11--12----9---10--NULL ..
 
 '''
 class Solution:
     
     def flatten(self, head: 'Node') -> 'Node':
         stack = []
-        temp = head
+        ans = head
         
         while head:
             if head.child:
@@ -29,6 +33,7 @@ class Solution:
             elif not head.next and stack:
                 head.next = stack.pop()
                 head.next.prev = head
-            head = head.next
-        return temp
+            head = head.next 
+        return ans
+        
         
