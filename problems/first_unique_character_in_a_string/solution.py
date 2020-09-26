@@ -1,17 +1,18 @@
+import collections
 class Solution:
     def firstUniqChar(self, s: str) -> int:
+        # hashmap
+            # 1 
         
-        ans = {}
+        ans = collections.defaultdict(int)
         
-        for letters in range(len(s)):
-            if s[letters] not in ans:
-                ans[s[letters]] = 1
+        for char in range(len(s)):
+            if s[char] in ans:
+                ans[s[char]] += 1
             else:
-                ans[s[letters]] += 1
-                
+                ans[s[char]] = 1
         
-        
-        for letters in ans:
-            if ans[letters] == 1:
-                return s.index(letters)
+        for char in ans:
+            if ans[char] == 1:
+                return s.index(char)
         return -1
