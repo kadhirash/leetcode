@@ -8,17 +8,17 @@ class Solution:
     def verticalTraversal(self, root: TreeNode) -> List[List[int]]:
         if not root: return None
         
-        column_dict = defaultdict(list)
+        col_dict = defaultdict(list)
         queue = deque([(root,0)])
     
         min_col = max_col = 0
         
         while queue:
             size = len(queue)
-            temp = defaultdict(list)
+            temp_dict = defaultdict(list)
             for _ in range(size):
                 node, col= queue.popleft()
-                temp[col].append(node.val)
+                temp_dict[col].append(node.val)
             
                 if node.left:
                     queue.append((node.left, col - 1))
@@ -28,9 +28,9 @@ class Solution:
                     queue.append((node.right, col + 1))
                     max_col = max(max_col, col + 1)
                 
-            for i in temp:
-                column_dict[i] += sorted(temp[i])
+            for i in temp_dict:
+                col_dict[i] += sorted(temp_dict[i])
         ans = []
         for i in range(min_col, max_col+1):
-            ans.append(column_dict[i])
+            ans.append(col_dict[i])
         return ans
