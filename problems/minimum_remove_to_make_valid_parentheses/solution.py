@@ -1,61 +1,28 @@
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
-        stack, ans = [],[]
+        # keep track of left or right
+        # if left then appen 
+        
+        
+        stack = []
+        ans = []
         for c in s:
             ans.append(c)
             
+            
         for i in range(len(s)):
             if s[i] == '(':
-                stack.append(i) # index
+                stack.append(i)
             elif s[i] == ')':
                 if stack:
-                    stack.pop() # remove
+                    stack.pop()
                 else:
-                    ans[i] = '#' # add dummy var
-        
-        while stack: # all '('
-            ans[stack.pop()] = '#' # set the values to dummy var
+                    ans[i] = '#' # dummy variable
+            
+        while stack: # where its all ((
+            ans[stack.pop()] = '#'
+            
             
         
-        return ''.join(ans).replace('#',"")
-            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-#         stack = []
-#         res = []
-#         for c in s:
-#             res.append(c)
-        
-#         for i in range(len(s)):
-#             if s[i] == '(':
-#                 stack.append(i)
-#             elif s[i] == ')':
-#                 if stack:
-#                     stack.pop()
-#                 else:
-#                     res[i] = '#'
-#         while stack: # all open
-#             res[stack.pop()] = '#'
-            
-#         return "".join(res).replace('#',"")
+        return ''.join(ans).replace('#', '')
+                
