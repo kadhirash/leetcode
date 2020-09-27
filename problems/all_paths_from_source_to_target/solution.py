@@ -12,8 +12,8 @@ class Solution:
                 ans.append(path)
                 
             else:
-                if graph[path[-1]]:
-                    for i in graph[path[-1]]:
-                        stack.append(path+ [i])
+                for i in graph[path[-1]]:
+                    if graph[path[-1]]:
+                        stack.append(path+[i])
                 
         return ans
