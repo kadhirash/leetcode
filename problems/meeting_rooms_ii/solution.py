@@ -1,38 +1,30 @@
+import heapq
 class Solution:
-    import heapq
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        # Clarifications:
-            # not sorted
-        # To Do:
-            # find min. # of conference rooms required
-        # Example:
-            # [0, 30],[5, 10],[15, 20]]
-            # 2
-        # Strategy:
-            # use a min heap -> "min" # of rooms
-            # sort by the start times
-            # iterate through the intervals starting at 1
-                # if the curr heap start_time <= index[0]
-                    # create a new room, push curr meeting end time to heap (now top element)
-                # else: pop
-            # return len of minheap
+        # sort 
+            # start times
+        # min heap
+            # end times 
+        # [30]  comp. [5] 
+        # [10,30]
+        # [10] comp. [15]
+            #pop 
+        # [20,30]
+            # return len heap
             
+        # edge case    
         if not intervals: return 0
         
-        rooms = [] # minheap
+        intervals.sort(key = lambda x : x[0])
         
-        intervals.sort(key = lambda x:x[0]) # sort rooms by start time
+        heap = []
         
-        
-        heapq.heappush(rooms, intervals[0][1]) # [ [[0, 30],[5, 10],[15, 20]] ]
-        
-        for meeting_times in range(1,len(intervals)):
-            if rooms[0] <= intervals[meeting_times][0]:
-                heapq.heappop(rooms)
-            heapq.heappush(rooms,intervals[meeting_times][1])
-        return len(rooms)
+        heapq.heappush(heap,intervals[0][1]) # [30]
         
         
+        for i in range(1,len(intervals)):
+            if heap[0] <= intervals[i][0]:
+                heapq.heappop(heap)
+            heapq.heappush(heap,intervals[i][1])
             
-            
-        
+        return len(heap)
