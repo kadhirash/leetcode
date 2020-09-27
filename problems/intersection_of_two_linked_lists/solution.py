@@ -6,29 +6,22 @@
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
-         # 2 pointers
-                # pointA, pointB
-                
-                
-            if not headA or not headB:
-                return None
+        
+        if not headA or not headB: return None
+        pa = headA
+        pb = headB
+        
+        while pa != pb:
+            pa = pa.next
+            pb = pb.next
             
-            pA, pB = headA, headB
+            if pa == pb:
+                return pa
             
-            while pA != pB:
-                pA = pA.next
-                pB = pB.next
+            if not pa:
+                pa = headB
                 
-                if pA == pB:
-                    return pA
+            if not pb:
+                pb = headA
                 
-                if not pA:
-                    pA = headB
-                if not pB:
-                    pB = headA
-                
-                
-            return pA
-            
-            
-                    
+        return pa
