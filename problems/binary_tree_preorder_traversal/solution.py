@@ -6,16 +6,10 @@
 #         self.right = right
 class Solution:
     def preorderTraversal(self, root: TreeNode) -> List[int]:
-        # recursive:
-        # root, left, right
-        # if not root:
-        #     return []
-        # else:
-        #     return [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right)
+        # ROOT<LEFT<RIGHT
         
-        # iterative
         
-        ans, stack = [],[]
+        ans, stack = [], []
         
         while stack or root:
             if root:
@@ -26,8 +20,3 @@ class Solution:
                 root = stack.pop()
                 root = root.right
         return ans
-    
-    
-    
-    
-                
