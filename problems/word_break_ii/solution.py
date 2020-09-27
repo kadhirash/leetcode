@@ -1,18 +1,21 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
-        dp = {}
-        def word_break(s):
-            if s in dp: return dp[s]
-            res = []
-            for w in wordDict:
-                if s[:len(w)] == w:
-                    if len(w) == len(s):
-                        res.append(w)
-                    else:
-                        temp = word_break(s[len(w):])
-                        for t in temp:
-                            res.append(w + " " + t)
-            dp[s] = res
-            return res
-        return word_break(s)
+        return self.helper(s, wordDict, {})
     
+    def helper(self, s, wordDict, memo):
+        if s in memo: return memo[s]
+        if not s: return []
+        word_set = set(wordDict)
+        res = []
+        for word in word_set:
+            if not s.startswith(word):
+                continue
+            if len(word) == len(s):
+                res.append(word)
+            else:
+                resultOfTheRest = self.helper(s[len(word):], word_set, memo)
+                for item in resultOfTheRest:
+                    item = word + ' ' + item
+                    res.append(item)
+        memo[s] = res
+        return res
