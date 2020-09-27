@@ -5,18 +5,8 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        # curr_node and an ans node, carry var
-        # iterate through the l2/l2 nodes
-            # add to carry
-        # curr.next -> carry % 10 
-        # curr = curr.next
-        # carry //10
-        # return ans.next 
-        
-        
-        ans = curr = ListNode(0)
+        ans = temp = ListNode(0)
         carry = 0
-        
         while l1 or l2 or carry:
             if l1:
                 carry += l1.val
@@ -25,8 +15,7 @@ class Solution:
                 carry += l2.val
                 l2 = l2.next
                 
-            curr.next = ListNode(carry % 10)
-            curr = curr.next
+            temp.next = ListNode(carry % 10)
+            temp = temp.next
             carry //= 10
-            
         return ans.next
