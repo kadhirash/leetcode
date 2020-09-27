@@ -4,41 +4,41 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+import collections
 class Solution:
     def verticalOrder(self, root: TreeNode) -> List[List[int]]:
-        if not root:
-            return None
+        # queue
+        # hashmap -> store values
+        # iterate thrgouh the min_col <-> max_col
+            # return ans via the hashmap
         
-        col_dict = defaultdict(list)
-        queue = deque()
-        queue.append((root,0)) # append root and it's col
+        if not root:
+            return []
+        col_dict = collections.defaultdict(list)
+        queue = collections.deque()
+        queue.append((root,0)) # root, col #
         
         min_col = max_col = 0
         
         while queue:
-            node,col = queue.popleft()
+            root,col = queue.popleft()
             
-            if node.left:
-                queue.append((node.left, col-1))
+            if root.left:
+                queue.append((root.left,col-1))
                 min_col = min(min_col, col-1)
+            
+            if root.right:
+                queue.append((root.right, col + 1))
+                max_col = max(max_col, col + 1)
                 
-            if node.right:
-                queue.append((node.right, col+1))
-                max_col = max((max_col, col+1))
-                
-            col_dict[col].append(node.val) # add the node's values at it's col key
-    
-        columns = []
+            col_dict[col].append(root.val)
         
-        for i in range(min_col, max_col + 1):
-            columns.append(col_dict[i])
-        return columns
+        ans = []
+        
+        for i in range(min_col, max_col+1):
+            ans.append(col_dict[i])
+        return ans
+        
+            
         
         
-        
-        
-        
-        
-        
-        
-    
