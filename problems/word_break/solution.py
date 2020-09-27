@@ -1,32 +1,35 @@
+import collections
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        # non empty string = s
-        # non empty words = wordDict
-        # can s be made from wordDict
+        # q/a:
+            # if no s or no wordDict: return False
+        # strat:
+            # bfs 
+                # deque
+            # wordDict -> wordset 
+            # visited 
+            # pop off the s 
+            # create new_string
+                # == ''
+                
+        if not s or not wordDict:
+            return False
         
-        # same word from wordDict can be used
-        # dictionary = no duplicates
+        word_set = set(wordDict)
+        visited = set()
         
-        # queue to put string in 
-        # set so no duplices
-        # iterate through queue and pop off values and set it to the string
-            # compare words in wordDict to the queue
-            # make a new string = s[len(word):]
-            # if true, new_string and add to seen
-            # if in seen -> return True, else False
-            
+        queue = collections.deque()
+        queue.append(s)
         
-        queue = [s]
-        seen = set()
         while queue:
-            s = queue.pop()
-            for word in wordDict:
+            s = queue.popleft()
+            
+            for word in word_set:
                 if s.startswith(word):
-                    new_string = s[len(word):]
-                    if new_string == "":
+                    new_str = s[len(word):]
+                    if new_str == '':
                         return True
-                    if new_string not in seen:
-                        queue.append(new_string)
-                        seen.add(new_string)
+                    elif new_str not in visited:
+                        queue.append(new_str)
+                        visited.add(new_str)
         return False
-        
