@@ -1,20 +1,12 @@
+import collections
+import heapq
 class Solution:
-    import heapq, collections
     def frequencySort(self, s: str) -> str:
-        # Count the number of occurrences of each unique character in the input string
-        counts = {}
-        for c in s:
-            counts[c] = counts.get(c, 0) + 1
-            
-        # Descending sort by number of occurrence (frequency), but ascending sort by character (lexicographic)
         
-        sortedCounts = sorted((-n, c) for c, n in counts.items())
-                
-        # Concatenate character sequences
+        count = collections.Counter(s)
+        k = len(count)
+        ans = ''
         
-        ans = []
-        for n, c in sortedCounts:
-            ans.append(c*-n)
-        return ''.join(ans)
-
-
+        for c in heapq.nsmallest(k, count, key = lambda c: (-count[c], c)):
+            ans += c * count[c]
+        return ans
