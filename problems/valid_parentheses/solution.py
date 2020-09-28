@@ -1,27 +1,24 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        # strategy:
-            # create a mapping of brackets
-                # [], (), {}
-            # use a stack to keep track of brackets
+        if not s:
+            return True
+        
+        stack = []        
+        
+        mapping = {')': '(' , ']': "[" , "}": "{"}
             
-        
-        
-        stack = []
-        
-        mapping = {")": "(", "}" : "{", "]" : "["}
-        
-        for bracket in s:
-            if bracket in mapping:
+
+        for brack in s:
+            if brack in mapping:
                 if stack:
                     top_elem = stack.pop()
                 else:
                     top_elem = '#'
-            
-                if mapping[bracket] != top_elem:
+                    
+                if mapping[brack] != top_elem:
                     return False
             else:
-                stack.append(bracket)
-                
+                stack.append(brack)
+            
         return not stack
                 
