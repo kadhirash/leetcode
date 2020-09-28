@@ -1,11 +1,17 @@
-# DLL
+# DLL + hashmap 
+        # look up in O(1)
+# add them in O(1)  
+
 class Node:
     def __init__(self,key,value):
         self.key = key
         self.value = value
-        self.prev = None
+        self.prev = None 
         self.next = None
+
         
+
+                    
 class LRUCache:
 
     def __init__(self, capacity: int):
@@ -15,49 +21,44 @@ class LRUCache:
         self.tail = Node(0,0)
         self.head.next = self.tail
         self.tail.prev = self.head
-    
-    def get(self, key: int) -> int: #refresh how new it was
-        if key in self.dict:
-            node = self.dict[key]
-            self._remove(node)
-            self._add(node)
-            return node.value
-        else:
+        
+    def add(self,node):
+        p = self.tail.prev
+        p.next = node
+        node.next = self.tail
+        node.prev = p
+        self.tail.prev = node
+
+    def remove(self,node):
+        p = node.prev
+        p.next = node.next
+        node.next.prev = p 
+
+    def get(self, key: int) -> int:
+        if not key in self.dict:
             return -1
-        
-        
+        else:
+            node = self.dict[key]
+            self.remove(node)
+            self.add(node)
+            return node.value
 
     def put(self, key: int, value: int) -> None:
         if key in self.dict:
-            self._remove(self.dict[key])
-            del self.dict[key]
-        elif len(self.dict) >= (self.capacity):
-            node = self.head.next
-            self._remove(node)
-            del self.dict[node.key]
+            self.remove(self.dict[key]) # remove from list
+            del self.dict[key] # remove from hashmap
             
-        # add item to the MRU side of LRU cache
-        node = Node(key, value)
-        self.dict[key] = node   
-        self._add(node)
-    
-    def _remove(self,node): # remove node
-        prev = node.prev
-        prev.next = node.next
-        node.next.prev = prev
-    
-    
-    def _add(self, node): # add to tail for MRU side and pop from head for LRU side 
-        prev = self.tail.prev
-        prev.next = node
-        node.prev = prev
-        node.next = self.tail
-        self.tail.prev = node
+        elif len(self.dict) >= self.capacity:
+            node = self.head.next
+            self.remove(node)
+            del self.dict[node.key]
         
+        # ADD to the MRU
+        node = Node(key,value)
+        self.add(node) # add to lsit
+        self.dict[key] = node # update the key value pairing in hashmap
+    
 
-    
-        
-    
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
 # param_1 = obj.get(key)
