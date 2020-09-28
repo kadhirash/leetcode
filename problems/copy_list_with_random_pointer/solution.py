@@ -6,12 +6,14 @@ class Node:
         self.next = next
         self.random = random
 """
-import collections
+
 class Solution:
     def copyRandomList(self, head: 'Node') -> 'Node':
-        copy = collections.defaultdict(lambda: Node(0))
-        copy[None] = None
+        if not head:
+            return None
+        copy = collections.defaultdict(lambda: Node(0,None,None))
         node = head
+        copy[None]= None
         while node:
             copy[node].val = node.val
             copy[node].next = copy[node.next]
