@@ -3,18 +3,6 @@ class Solution:
         if x < 2:
             return x
         
-        left, right = 2, x // 2
-        
-        while left <= right:
-            mid = left + (right-left) // 2
-            
-            ans = mid * mid
-            
-            if ans == x:
-                return mid
-            elif ans < x:
-                left = mid + 1
-            elif ans > x:
-                right = mid - 1
-        
-        return right
+        left = self.mySqrt(x >> 2) << 1
+        right = left + 1
+        return left if right * right > x else right
