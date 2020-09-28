@@ -4,14 +4,18 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-import collections
 class Solution:
     def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
-        if not root: return None
-        ans = [] 
+        # top to bottom, every other row -> left to right and right to left
+        
+        
+        if not root: 
+            return None
         
         queue = collections.deque()
         queue.append(root)
+        
+        ans = []
         
         while queue:
             size = len(queue)
@@ -24,6 +28,7 @@ class Solution:
                 
                 if root.left:
                     queue.append(root.left)
+                    
                 if root.right:
                     queue.append(root.right)
                     
