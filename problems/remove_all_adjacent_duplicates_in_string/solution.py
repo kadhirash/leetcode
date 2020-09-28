@@ -1,5 +1,11 @@
 class Solution:
     def removeDuplicates(self, S: str) -> str:
+        # abbaca 
+            # [ca]
+            
+            
+        
+        
         stack = []
         
         for c in S:
