@@ -3,8 +3,11 @@ class Solution:
         return self.helper(s, wordDict, {})
     
     def helper(self, s, wordDict, memo):
-        if s in memo: return memo[s]
-        if not s: return []
+        if s in memo: 
+            return memo[s]
+        if not s: 
+            return []
+        
         word_set = set(wordDict)
         res = []
         for word in word_set:
