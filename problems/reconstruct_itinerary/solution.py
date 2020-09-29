@@ -1,3 +1,4 @@
+import collections
 class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
         # strat:
@@ -8,28 +9,20 @@ class Solution:
             # sort them lexicographically
         
             
-        ans = []
-        adj_list = defaultdict(list)
+        adj_list = collections.defaultdict(deque)
         # created the adj. list
-        for i, j in tickets:
+        for i, j in sorted(tickets): 
             adj_list[i].append(j) # from --> to
+    
+        
+         # dfs
+        ans, stack = deque([]), ['JFK']
+        while stack:
+            while adj_list[stack[-1]]:
+                stack.append(adj_list[stack[-1]].popleft())# pop from front until dead end
+            ans.appendleft(stack.pop())
+        return ans
             
-        
-        # sort lexicographically
-        for keys in adj_list:
-            adj_list[keys] = sorted(adj_list[keys]) # Onlogn
-        
-        
-        # dfs
-        
-        def dfs(airport):
-            while adj_list[airport]:
-                candidate = adj_list[airport].pop(0)
-                dfs(candidate)
-            ans.append(airport)
-        dfs('JFK')
-        
-        return reversed(ans)
             
         
         
