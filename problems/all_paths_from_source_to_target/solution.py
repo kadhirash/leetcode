@@ -11,9 +11,8 @@ class Solution:
             if path[-1] == target:
                 ans.append(path)
                 
-            else:
+            elif graph[path[-1]]:
                 for i in graph[path[-1]]:
-                    if graph[path[-1]]:
-                        stack.append(path+[i])
+                    stack.append(path+[i])
                 
         return ans
