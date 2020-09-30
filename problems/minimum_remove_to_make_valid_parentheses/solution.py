@@ -1,22 +1,33 @@
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
+        # q/a:
+            # return "" if not s
+        # strat:
+            # stack
+                # "(" ")"
+            # ans 
+                # s
+            # '%' -> dummy variable
+            # replace dummy variable with a space
+            
+            # 
+            # ans = [%%%%]
+            
         stack = []
         ans = []
         for c in s:
             ans.append(c)
-            
-        for i in range(len(s)):
-            if s[i] == '(':
-                stack.append(i)
-            elif s[i] == ')':
+        
+        for c in range(len(s)):
+            if s[c] == '(':
+                stack.append(c)
+            elif s[c] == ')':
                 if stack:
                     stack.pop()
                 else:
-                    ans[i] = '#'
-                    
-        while stack:
-            ans[stack.pop()] = '#'
-            
-            
+                    ans[c] = '%'
         
-        return ''.join(ans).replace('#', '')
+        while stack:
+            ans[stack.pop()] = '%'
+            
+        return ''.join(ans).replace('%','')
