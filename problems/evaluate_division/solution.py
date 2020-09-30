@@ -1,12 +1,34 @@
 class Solution:
     def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-        quot = collections.defaultdict(dict)
-        for (num, den), val in zip(equations, values):
-            quot[num][num] = quot[den][den] = 1.0
-            quot[num][den] = val
-            quot[den][num] = 1 / val
-        for k in quot:
-            for i in quot[k]:
-                for j in quot[k]:
-                    quot[i][j] = quot[i][k] * quot[k][j]
-        return [quot[num].get(den, -1.0) for num, den in queries]
+        
+        # build the graph
+        graph = collections.defaultdict(dict) # access value that doesn't exist so no error
+        for (x,y), val in zip(equations,values):
+            graph[x][y] = val
+            graph[y][x] = 1.0/val # floating point
+        # dfs 
+        def dfs(x,y,visited):
+            # 1st condition: x,y not in graph
+            if x not in graph or y not in graph:
+                return -1.0
+            # 2nd condition: direct connection exists
+            if y in graph[x]:
+                return graph[x][y]
+            # 3rd condition: division but not directly connected
+            for i in graph[x]: # all the nodes graph[x] is pointing to
+                if i not in visited:
+                    visited.add(i) 
+                    temp = dfs(i,y,visited)
+                    if temp == -1.0:
+                        continue
+                    else:
+                        return graph[x][i] * temp
+            # 4th condition: nothing
+            return -1.0
+        
+        # ans 
+        ans = []
+        for query in queries:
+            ans.append(dfs(query[0],query[1], set()))
+        return ans
+        
