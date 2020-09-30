@@ -5,20 +5,17 @@
 #         self.next = next
 class Solution:
     def swapPairs(self, head: ListNode) -> ListNode:
-        # 1 --> 2 --> 3 --> 4 --> None
-        
-        # 1 => head_swap ===> 3
-        # 3 => head_next_swap ==> None
-        
-        # swap the values w/ recursion 
-        
-        if head == None or head.next == None:
+        # If the list has no node or has only one node left.
+        if not head or not head.next:
             return head
-        
-        head_swap = head 
-        head_next_swap = head.next
-        
-        head_swap.next = self.swapPairs(head_next_swap.next)
-        head_next_swap.next = head_swap # actual swapping
-        
-        return head_next_swap
+
+        # Nodes to be swapped
+        first_node = head
+        second_node = head.next
+
+        # Swapping
+        first_node.next  = self.swapPairs(second_node.next)
+        second_node.next = first_node
+
+        # Now the head is the second node
+        return second_node
