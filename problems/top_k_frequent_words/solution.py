@@ -1,11 +1,8 @@
 class Solution:
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
-        if not words or not k:
-            return None
-        heap = []
-        
         count = collections.Counter(words)
         
+        heap = []
         
         for word, freq in count.items():
             heap.append((-freq,word))
@@ -13,7 +10,6 @@ class Solution:
         heapq.heapify(heap)
         
         ans = []
-        for _ in range(k):
+        for i in range(k):
             ans.append(heapq.heappop(heap)[1])
         return ans
-            
