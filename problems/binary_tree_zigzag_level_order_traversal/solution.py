@@ -6,10 +6,14 @@
 #         self.right = right
 class Solution:
     def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
-        # top to bottom, every other row -> left to right and right to left
+        # q/a:
+            # top --> bottom, left -> right
+            # if not root- -> None
+        # strat:
+            # bfs -> queue
         
         
-        if not root: 
+        if not root:
             return None
         
         queue = collections.deque()
@@ -23,17 +27,15 @@ class Solution:
             
             for i in range(size):
                 root = queue.popleft()
-                
                 root_level.append(root.val)
                 
                 if root.left:
                     queue.append(root.left)
-                    
                 if root.right:
                     queue.append(root.right)
                     
             ans.append(root_level)
-        
+            
         for i in range(1,len(ans),2):
             ans[i].reverse()
         return ans
