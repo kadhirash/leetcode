@@ -7,32 +7,33 @@
 import collections
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
-        # top --> bottom. Left ---> right
-    
-        # BFS
+        # q/a:
+            # top --> bottom, left -> right
+            # if not root- -> None
+        # strat:
+            # bfs -> queue
         
         
-        #strat:
-            # queue
-            
-            
         if not root:
             return None
         
         queue = collections.deque()
         queue.append(root)
         
-        ans = [] 
+        ans = []
         
         while queue:
             size = len(queue)
             root_level = []
+            
             for i in range(size):
                 root = queue.popleft()
                 root_level.append(root.val)
+                
                 if root.left:
                     queue.append(root.left)
                 if root.right:
                     queue.append(root.right)
+                    
             ans.append(root_level)
         return ans
