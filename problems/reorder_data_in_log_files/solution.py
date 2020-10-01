@@ -1,15 +1,14 @@
 class Solution:
     def reorderLogFiles(self, logs: List[str]) -> List[str]:
-        digits = []
-        letters = []
-		# divide logs into two parts, one is digit logs, the other is letter logs
+        res = []
+        # get the letter-log first
+        for string in logs:
+            if string.split()[1].isalpha():
+                res.append(string)
+        # sort the letter-log 
+        res.sort(key = lambda x: (x.split()[1:], x.split()[0]))
+        # get the digits-log using its original order
         for log in logs:
             if log.split()[1].isdigit():
-                digits.append(log)
-            else:
-                letters.append(log)
-        
-        letters.sort(key = lambda x: x.split()[0])            #when suffix is tie, sort by identifier
-        letters.sort(key = lambda x: x.split()[1:])           #sort by suffix
-        result = letters + digits                                        #put digit logs after letter logs
-        return result
+                res.append(log)
+        return res
