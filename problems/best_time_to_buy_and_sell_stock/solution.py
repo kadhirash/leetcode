@@ -10,17 +10,16 @@ class Solution:
             # [7,1,5,3,6,4]
             # 5
             
-        
-        min_buy, max_profit = float('inf'), float('-inf')
-        
-        if not prices: return 0
-        
-        for price_of_stock in prices:
-            min_buy = min(min_buy, price_of_stock)
-            profit = price_of_stock - min_buy
-            max_profit = max(max_profit, profit)
-            
-        return max_profit
+        if not prices:
+            return 0
+        dp = [0] * len(prices)
+        min_price = prices[0]
+
+        for i in range(len(prices)):
+            dp[i] = max(dp[i - 1], prices[i] - min_price)
+            min_price = min(min_price, prices[i])
+
+        return dp[-1]
         
         
         
