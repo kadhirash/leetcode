@@ -4,3 +4,4 @@ class Solution:
             if s.index(c) == s.rindex(c):
                 return s.index(c)
         return -1
+    
