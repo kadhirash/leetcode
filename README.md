@@ -1,5 +1,5 @@
 # leetcode
-A culmination of my progress on Leetcode problems to help prepare me for technical interviews. I currently have Leetcode Premium, and premium problems will be marked with "🤐"
+A culmination of my progress on Leetcode problems to help prepare me for technical interviews. I currently have Leetcode Premium!!
 
 My plan is to start with some easy problems, get comfortable then move onto medium and hard problems. 
 
@@ -9,7 +9,7 @@ I still will have some old C++ and Java solutions from time to time as I know C+
 
 Here is my current [profile](https://leetcode.com/kaddy/)
 
-I have split the problems by difficulty in separate folders, and plan to organize them further as the number of completed problems increase! 
+I found a neat tool from someone's [github](https://github.com/joshcai/leetcode-sync) to let me sync my leetcode solutions so I don't have to manually update it every time!! 
 
 As the saying goes, 
 
