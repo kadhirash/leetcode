@@ -1,3 +1,4 @@
+package main
 func trap(height []int) int {
     var water, lowestSide, leftHeight, rightHeight int
     maxHeight, maxPos := getHeighestBar(height)
